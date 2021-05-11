@@ -1,13 +1,13 @@
 #include <iostream>
 #include <math.h>
-#include "vecteur3.hpp"
+#include "vector.hpp"
 
 
 class Body{
     public :
-    vecteur Position ;
-    vecteur Speed ;
-    vecteur Force ;
+    vector Position ;
+    vector Speed ;
+    vector Force ;
     double Mass  ;
 
 
@@ -16,9 +16,9 @@ class Body{
 
     
     Body(double X , double Y , double Z , double Vx , double Vy ,double Vz ,double mass){
-        Position = vecteur(X,Y,Z);
-        Speed = vecteur(Vx,Vy,Vz);
-        Force = vecteur(0.,0.,0.);
+        Position = vector(X,Y,Z);
+        Speed = vector(Vx,Vy,Vz);
+        Force = vector();
         Mass = mass ;
 
     };
@@ -38,9 +38,9 @@ class Body{
 
     void compute_force(Body& other , double epsilon , double G ){
 
-        vecteur between = Position-other.Position;
+        vector between = Position-other.Position;
         double lenght = between||between ;
-        vecteur force = (between*((-G*Mass*other.Mass)/(pow(lenght+epsilon,1.5))));
+        vector force = (between*((-G*Mass*other.Mass)/(pow(lenght+epsilon,1.5))));
         Force+=force;
         other.Force-=force;
 
@@ -48,7 +48,7 @@ class Body{
 
     void compute_new_pos(double dt){
         
-        vecteur acceleration = Force/Mass;
+        vector acceleration = Force/Mass;
         Speed+=acceleration*dt;
         Position+=Speed*dt;
         Force = Force*0;
