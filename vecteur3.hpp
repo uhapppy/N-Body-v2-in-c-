@@ -2,94 +2,65 @@
 #include <string>
 #include <math.h>
 using namespace std;
-class vecteur{
-    public:
-    int size = 3 ;
-    double  data[3];
+class vector {
+    public :
+    double X,Y,Z ;
 
 
-    
+    vector(){
+        X=0;
+        Y=0;
+        Z=0;
+    }
 
-    //constructeur de base
-    vecteur(){
-        data[0]=0.;
-        data[1]=0.;
-        data[2]=0.;
-        
-    };
+    vector(double x,double y ,double z){
+        X=x;
+        Y=y;
+        Z=z;
+    }
 
 
-    //construtor avec array et size
-    vecteur(double X, double Y,double Z){
-        data[0]=X;
-        data[1]=Y;
-        data[2]=Z;
-    };
-
-    // print le contenue du vecteur 
     void print(){
-        std::cout <<  "[ ";
-        for(int i = 0 ; i<size-1 ; i++){
-            std::cout << data[i]<<" , ";
-        };
-        std::cout << data[size-1];
-        std::cout << " ]";
+        std::cout<<"[ "<<X<<" , "<<Y<<" , "<<Z<<" ]";
+    }
+
+    double lenght(){
+        return sqrt(pow(X,2)+pow(Y,2)+pow(Z,2));
     };
 
 
-
-    double operator[] (int N){
-        return(data[N]);
-    };
-
-    vecteur operator+ (vecteur in){
-        vecteur output(data[0]+in.data[0],data[1]+in.data[1],data[2]+in.data[2]) ;
-        return (output);
-    };
-
-    vecteur operator- (vecteur in){
-        vecteur output(data[0]-in.data[0],data[1]-in.data[1],data[2]-in.data[2]) ;
-        return (output);
+    vector operator-(vector in ){
+        return vector(X-in.X,Y-in.Y,Z-in.Z);
     };
 
 
-    void operator-= (vecteur in){
-        data[0]-=in.data[0];
-        data[1]-=in.data[1];
-        data[2]-=in.data[2];
-        
+    vector operator+(vector in ){
+        return vector(X+in.X,Y+in.Y,Z+in.Z);
     };
 
-    void operator+= (vecteur in){
-        data[0]+=in.data[0];
-        data[1]+=in.data[1];
-        data[2]+=in.data[2];
-        
+
+    void operator-=(vector in ){
+        X-=in.X; Y-=in.Y; Z-=in.Z;
     };
 
-    void operator= (vecteur in){
-        
-        data[0]=in.data[0];
-        data[1]=in.data[1]; 
-        data[2]=in.data[2];  
-        
+    void operator+=(vector in ){
+        X+=in.X; Y+=in.Y; Z+=in.Z;
     };
 
-    vecteur operator* (double scalar){
-        vecteur output(data[0]*scalar,data[1]*scalar,data[2]*scalar) ;
-        return output;
-    };
+    void operator=(vector in){
+        X=in.X; Y=in.Y; Z=in.Z;
+    }
 
+    vector operator*(double scalar){
+        return vector(X*scalar,Y*scalar,Z*scalar);
+    };
     
-    vecteur operator/ (double scalar){
-        vecteur output(data[0]/scalar,data[1]/scalar,data[2]/scalar) ;
-        return output;
+    vector operator/(double scalar){
+        return vector(X/scalar,Y/scalar,Z/scalar);
     };
 
-
-    double operator|| (vecteur in){
-        double output = data[0]*in.data[0]+data[1]*in.data[1]+data[2]*in.data[2]  ;
-        return output;
-    };
+    double operator||(vector in ){
+        return X*in.X+Y*in.Y+Z*in.Z;
+    }
 
 };
